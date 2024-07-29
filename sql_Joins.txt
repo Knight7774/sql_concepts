@@ -36,10 +36,34 @@ CREATE TABLE usersDb (
 Insert INTO collegesDb(collegeName,collegeCode,location) VALUES("Velammal Eng College","1001","Chennai");
 Insert INTO family_background(fatherName,motherName,address) VALUES("vivekanandan","mohana","33,kanngi st");
 Insert INTO usersDb(firstname,lastname,email,background,college) VALUES("RAHUL","V","r@gmail.com",1,1);
-
+Insert INTO usersDb(firstname,lastname,email,background,college) VALUES("RAM","V","ram@gmail.com",1,1);
+Insert INTO usersDb(firstname,lastname,email,background,college) VALUES("deepak","V","deepak@gmail.com",1,1);
 -- SELECT * FROM collegesDb; 
 -- SELECT * FROM usersDb;
 
+-- SELECT 
+-- 	u.id,
+--     u.firstname,
+--     u.lastname,
+--     u.email,
+--     c.collegeName,
+--     c.collegeCode,
+--     c.location,
+--     f.fatherName,
+--     f.motherName,
+--     f.address
+-- FROM
+-- 	usersDb u
+-- JOIN
+-- 	collegesDb c
+-- ON 
+-- 	u.college = c.id
+-- JOIN
+-- 	family_background f
+-- ON 
+-- 	u.background = f.id;
+
+-- Using WHERE Clause without using of ON Clause
 SELECT 
 	u.id,
     u.firstname,
@@ -55,12 +79,10 @@ FROM
 	usersDb u
 JOIN
 	collegesDb c
-ON 
-	u.college = c.id
 JOIN
 	family_background f
-ON 
-	u.background = f.id;
+WHERE 
+	u.college = c.id AND u.background = f.id AND u.id=2;
 
 	
     
