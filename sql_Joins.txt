@@ -1,0 +1,66 @@
+CREATE DATABASE IF NOT EXISTS user_accounts;
+use user_accounts;
+
+
+DROP TABLE IF EXISTS usersDb;
+DROP TABLE IF EXISTS collegesDb;
+DROP TABLE IF EXISTS family_background;
+
+
+CREATE TABLE collegesDb (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    collegeName VARCHAR(255) NOT NULL,
+    collegeCode VARCHAR(255) NOT NULL,
+    location VARCHAR(255) NOT NULL
+    
+);
+CREATE TABLE family_background (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    fatherName VARCHAR(255) NOT NULL,
+    motherName VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE usersDb (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    firstname VARCHAR(255) NOT NULL,
+    lastname VARCHAR(255) NOT NULL,
+    email varchar(255) UNIQUE NOT NULL,
+    background INT NOT NULL,
+    college INT NOT NULL,
+    FOREIGN KEY(background) REFERENCES family_background(id), 
+	FOREIGN KEY(college) REFERENCES collegesDb(id)
+    
+);
+
+Insert INTO collegesDb(collegeName,collegeCode,location) VALUES("Velammal Eng College","1001","Chennai");
+Insert INTO family_background(fatherName,motherName,address) VALUES("vivekanandan","mohana","33,kanngi st");
+Insert INTO usersDb(firstname,lastname,email,background,college) VALUES("RAHUL","V","r@gmail.com",1,1);
+
+-- SELECT * FROM collegesDb; 
+-- SELECT * FROM usersDb;
+
+SELECT 
+	u.id,
+    u.firstname,
+    u.lastname,
+    u.email,
+    c.collegeName,
+    c.collegeCode,
+    c.location,
+    f.fatherName,
+    f.motherName,
+    f.address
+FROM
+	usersDb u
+JOIN
+	collegesDb c
+ON 
+	u.college = c.id
+JOIN
+	family_background f
+ON 
+	u.background = f.id;
+
+	
+    
